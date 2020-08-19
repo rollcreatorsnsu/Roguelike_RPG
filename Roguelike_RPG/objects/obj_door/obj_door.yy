@@ -1,23 +1,14 @@
 {
-    "id": "19f69dc9-cb01-42fb-9749-3fc2771718fe",
+    "id": "0e1e7f6d-4a27-4ae5-abaa-fd122e4c92eb",
     "modelName": "GMObject",
     "mvc": "1.0",
-    "name": "obj_serializer",
+    "name": "obj_door",
     "eventList": [
-        {
-            "id": "e201c03e-5dd8-4878-a9f7-85d66d235ea6",
-            "modelName": "GMEvent",
-            "mvc": "1.0",
-            "IsDnD": false,
-            "collisionObjectId": "00000000-0000-0000-0000-000000000000",
-            "enumb": 0,
-            "eventtype": 0,
-            "m_owner": "19f69dc9-cb01-42fb-9749-3fc2771718fe"
-        }
+        
     ],
     "maskSpriteId": "00000000-0000-0000-0000-000000000000",
     "overriddenProperties": null,
-    "parentObjectId": "00000000-0000-0000-0000-000000000000",
+    "parentObjectId": "2ac100a7-edc5-42b2-a8f0-159f57e3e146",
     "persistent": false,
     "physicsAngularDamping": 0.1,
     "physicsDensity": 0.5,
@@ -33,6 +24,6 @@
     "physicsStartAwake": true,
     "properties": null,
     "solid": false,
-    "spriteId": "00000000-0000-0000-0000-000000000000",
+    "spriteId": "e38ff055-9c0b-442a-be14-6e88da1a996b",
     "visible": true
 }

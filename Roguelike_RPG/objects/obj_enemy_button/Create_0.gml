@@ -1,0 +1,1 @@
+factory = obj_enemy
