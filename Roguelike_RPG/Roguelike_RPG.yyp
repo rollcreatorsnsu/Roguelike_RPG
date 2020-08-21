@@ -95,6 +95,14 @@
             }
         },
         {
+            "Key": "1db95d51-90fa-4639-81b3-a4266a2d7ca0",
+            "Value": {
+                "id": "d1005020-5e1b-4e05-9f0d-f02599fdfb11",
+                "resourcePath": "objects\\obj_shop\\obj_shop.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "1e6c1fe0-4ee5-49c2-aa06-5bbe5bad739f",
             "Value": {
                 "id": "8708aef5-5a3d-4a3f-bd08-3a13fb2e8fff",
@@ -123,6 +131,14 @@
             "Value": {
                 "id": "798d775c-a218-43c3-8aac-b9f62dc7abbc",
                 "resourcePath": "objects\\obj_levelGenerator\\obj_levelGenerator.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "2fc91fa7-c832-4058-bc52-9aabc8a1c6b6",
+            "Value": {
+                "id": "6421ac9d-074e-4f0d-b55d-971d9aa77c53",
+                "resourcePath": "objects\\obj_boss\\obj_boss.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -156,6 +172,14 @@
                 "id": "4765f41a-7d90-403c-9de5-94a6e9314034",
                 "resourcePath": "views\\38bcca08-8542-4b3a-9176-ff68d33ea3b9.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "39b8f77f-6f38-4ad4-a015-08d6fb34cd8f",
+            "Value": {
+                "id": "2bdc4c37-6f4a-42a8-8366-f405fa38eeb7",
+                "resourcePath": "objects\\obj_money\\obj_money.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -292,6 +316,14 @@
                 "id": "6bbe271e-ee40-43d5-81cd-2c3db3c0c63c",
                 "resourcePath": "views\\87b52d9f-094e-441e-9fb1-c5f61a35a69f.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "8c8134a9-fb69-4640-87e1-a82fec0596e0",
+            "Value": {
+                "id": "6e8789d1-c5e2-471a-909e-b23b92145926",
+                "resourcePath": "scripts\\scr_putObject\\scr_putObject.yy",
+                "resourceType": "GMScript"
             }
         },
         {
@@ -456,7 +488,7 @@
         }
     ],
     "script_order": [
-        
+        "8c8134a9-fb69-4640-87e1-a82fec0596e0"
     ],
     "tutorial": ""
 }
