@@ -83,7 +83,7 @@ scr_putObject(file, x0, y0)
 file_text_close(file)
 
 files = []
-files_number = scr_getFilesByMask(files, "start*.room")
+files_number = scr_getFilesByMask(files, "boss*.room")
 room_number = irandom_range(0, files_number - 1)
 file = file_text_open_read(files[room_number])
 width = file_text_read_real(file)
@@ -98,7 +98,7 @@ scr_putObject(file, x0, y0)
 file_text_close(file)
 
 files = []
-files_number = scr_getFilesByMask(files, "start*.room")
+files_number = scr_getFilesByMask(files, "treasure*.room")
 room_number = irandom_range(0, files_number - 1)
 file = file_text_open_read(files[room_number])
 width = file_text_read_real(file)
@@ -118,7 +118,7 @@ scr_putObject(file, x0, y0)
 file_text_close(file)
 
 files = []
-files_number = scr_getFilesByMask(files, "start*.room")
+files_number = scr_getFilesByMask(files, "shop*.room")
 room_number = irandom_range(0, files_number - 1)
 file = file_text_open_read(files[room_number])
 width = file_text_read_real(file)
