@@ -1,5 +1,5 @@
 filename = get_open_filename("*.room", "file")
-file = file_text_open_read(working_directory + "/" + filename)
+file = file_text_open_read(filename)
 
 for (i = 0; i < global.width; i++) {
 	for (j = 0; j < global.height; j++) {

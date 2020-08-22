@@ -1,5 +1,5 @@
 filename = get_save_filename("*.room", "file")
-file = file_text_open_write(working_directory + "/" + filename)
+file = file_text_open_write(filename)
 file_text_write_real(file, global.width)
 file_text_writeln(file)
 file_text_write_real(file, global.height)
