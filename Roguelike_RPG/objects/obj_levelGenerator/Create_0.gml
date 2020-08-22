@@ -200,9 +200,21 @@ for (i = 0; i < connections_count; i++) {
 		if (room_size_prev[3] == room_size_next[1]) {
 			door_prev_coord[1] = room_size_prev[3] - 3
 			door_next_coord[1] = room_size_next[1]
+			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) == noone) {
+				door_prev_coord[1]--
+			}
+			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) == noone) {
+				door_next_coord[1]++
+			}
 		} else {
 			door_prev_coord[1] = room_size_prev[1]
 			door_next_coord[1] = room_size_next[3] - 3
+			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) == noone) {
+				door_prev_coord[1]++
+			}
+			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) == noone) {
+				door_next_coord[1]--
+			}
 		}
 	} else {
 		segment_begin = max(room_size_prev[1], room_size_next[1])
@@ -212,9 +224,21 @@ for (i = 0; i < connections_count; i++) {
 		if (room_size_prev[2] == room_size_next[0]) {
 			door_prev_coord[0] = room_size_prev[2] - 3
 			door_next_coord[0] = room_size_next[0]
+			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) == noone) {
+				door_prev_coord[0]--
+			}
+			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) == noone) {
+				door_next_coord[0]++
+			}
 		} else {
 			door_prev_coord[0] = room_size_prev[0]
 			door_next_coord[0] = room_size_next[2] - 3
+			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) == noone) {
+				door_prev_coord[1]++
+			}
+			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) == noone) {
+				door_next_coord[1]--
+			}
 		}
 	}
 	instance_destroy(instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall))
