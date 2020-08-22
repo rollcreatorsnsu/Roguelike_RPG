@@ -1,12 +1,5 @@
 files = []
-files[0] = file_find_first("rooms\\usual\\*.room", 0)
-i = 1
-do {
-	filename = file_find_next()
-	files[i] = filename
-	i++
-} until (filename != "");
-files_number = i
+files_number = scr_getFilesByMask(files, "usual*.room")
 rooms_count = get_integer("Enter number of rooms", 4)
 full_width = 0
 full_height = 0
@@ -73,14 +66,7 @@ for (i = 0; i < rooms_count; i++) {
 }
 
 files = []
-files[0] = file_find_first("rooms\\start\\*.room", 0)
-i = 1
-do {
-	filename = file_find_next()
-	files[i] = filename
-	i++
-} until (filename != "");
-files_number = i
+files_number = scr_getFilesByMask(files, "start*.room")
 room_number = irandom_range(0, files_number - 1)
 file = file_text_open_read(files[room_number])
 width = file_text_read_real(file)
@@ -95,14 +81,7 @@ scr_putObject(file, x0, y0)
 file_text_close(file)
 
 files = []
-files[0] = file_find_first("rooms\\finish\\*.room", 0)
-i = 1
-do {
-	filename = file_find_next()
-	files[i] = filename
-	i++
-} until (filename != "");
-files_number = i
+files_number = scr_getFilesByMask(files, "start*.room")
 room_number = irandom_range(0, files_number - 1)
 file = file_text_open_read(files[room_number])
 width = file_text_read_real(file)
@@ -117,14 +96,7 @@ scr_putObject(file, x0, y0)
 file_text_close(file)
 
 files = []
-files[0] = file_find_first("rooms\\money\\*.room", 0)
-i = 1
-do {
-	filename = file_find_next()
-	files[i] = filename
-	i++
-} until (filename != "");
-files_number = i
+files_number = scr_getFilesByMask(files, "start*.room")
 room_number = irandom_range(0, files_number - 1)
 file = file_text_open_read(files[room_number])
 width = file_text_read_real(file)
@@ -144,14 +116,7 @@ scr_putObject(file, x0, y0)
 file_text_close(file)
 
 files = []
-files[0] = file_find_first("rooms\\shop\\*.room", 0)
-i = 1
-do {
-	filename = file_find_next()
-	files[i] = filename
-	i++
-} until (filename != "");
-files_number = i
+files_number = scr_getFilesByMask(files, "start*.room")
 room_number = irandom_range(0, files_number - 1)
 file = file_text_open_read(files[room_number])
 width = file_text_read_real(file)

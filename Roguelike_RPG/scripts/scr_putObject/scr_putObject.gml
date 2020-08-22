@@ -1,7 +1,4 @@
-function scr_putObject(argument0, argument1, argument2) {
-	file = argument0
-	x0 = argument1
-	x1 = argument2
+function scr_putObject(file, x0, y0) {
 	while (!file_text_eof(file)) {
 		obj_name = file_text_read_string(file)
 		file_text_readln(file)

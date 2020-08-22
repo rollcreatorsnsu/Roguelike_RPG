@@ -5,6 +5,8 @@
     {"id":{"name":"sp_pattern_hero_front_right_idle","path":"sprites/sp_pattern_hero_front_right_idle/sp_pattern_hero_front_right_idle.yy",},"order":2,},
     {"id":{"name":"sp_pattern_hero_front_right_run","path":"sprites/sp_pattern_hero_front_right_run/sp_pattern_hero_front_right_run.yy",},"order":3,},
     {"id":{"name":"spr_mask","path":"sprites/spr_mask/spr_mask.yy",},"order":0,},
+    {"id":{"name":"rooms","path":"extensions/rooms/rooms.yy",},"order":0,},
+    {"id":{"name":"scr_getFilesByMask","path":"scripts/scr_getFilesByMask/scr_getFilesByMask.yy",},"order":1,},
     {"id":{"name":"spr_wall","path":"sprites/spr_wall/spr_wall.yy",},"order":1,},
     {"id":{"name":"spr_door","path":"sprites/spr_door/spr_door.yy",},"order":2,},
     {"id":{"name":"spr_rock","path":"sprites/spr_rock/spr_rock.yy",},"order":3,},
@@ -32,8 +34,8 @@
     {"id":{"name":"obj_boss","path":"objects/obj_boss/obj_boss.yy",},"order":5,},
     {"id":{"name":"obj_money","path":"objects/obj_money/obj_money.yy",},"order":6,},
     {"id":{"name":"obj_shop","path":"objects/obj_shop/obj_shop.yy",},"order":7,},
-    {"id":{"name":"room_editor","path":"rooms/room_editor/room_editor.yy",},"order":0,},
-    {"id":{"name":"room_game","path":"rooms/room_game/room_game.yy",},"order":1,},
+    {"id":{"name":"room_editor","path":"rooms/room_editor/room_editor.yy",},"order":1,},
+    {"id":{"name":"room_game","path":"rooms/room_game/room_game.yy",},"order":0,},
   ],
   "Options": [
     {"name":"Windows","path":"options/windows/options_windows.yy",},
@@ -47,8 +49,8 @@
     "children": [],
   },
   "RoomOrder": [
-    {"name":"room_editor","path":"rooms/room_editor/room_editor.yy",},
     {"name":"room_game","path":"rooms/room_game/room_game.yy",},
+    {"name":"room_editor","path":"rooms/room_editor/room_editor.yy",},
   ],
   "Folders": [
     {"folderPath":"folders/Sprites.yy","order":0,"resourceVersion":"1.0","name":"Sprites","tags":[],"resourceType":"GMFolder",},
@@ -68,6 +70,7 @@
     {"folderPath":"folders/Extensions.yy","order":13,"resourceVersion":"1.0","name":"Extensions","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Sequences.yy","order":1,"resourceVersion":"1.0","name":"Sequences","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Animation Curves.yy","order":2,"resourceVersion":"1.0","name":"Animation Curves","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Scripts/generator.yy","order":1,"resourceVersion":"1.0","name":"generator","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":461609314234257646,"resourceVersion":"1.0","name":"audiogroup_default","resourceType":"GMAudioGroup",},

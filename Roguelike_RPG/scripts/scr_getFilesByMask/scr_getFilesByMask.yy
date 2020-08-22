@@ -6,7 +6,7 @@
     "path": "folders/Scripts/generator.yy",
   },
   "resourceVersion": "1.0",
-  "name": "scr_putObject",
+  "name": "scr_getFilesByMask",
   "tags": [],
   "resourceType": "GMScript",
 }
