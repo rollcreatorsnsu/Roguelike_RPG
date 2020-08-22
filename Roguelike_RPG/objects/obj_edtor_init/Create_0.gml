@@ -1,4 +1,5 @@
 global.selected_cell = undefined
+global.current_button = undefined
 global.width = get_integer("Enter width of the room", 10);
 global.height = get_integer("Enter height of the room", 10);
 for (i = 0; i < global.width; i++) {

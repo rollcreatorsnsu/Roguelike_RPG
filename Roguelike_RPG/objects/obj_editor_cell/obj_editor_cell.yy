@@ -21,7 +21,7 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
-    {"isDnD":false,"eventNum":7,"eventType":6,"collisionObjectId":null,"parent":{"name":"obj_editor_cell","path":"objects/obj_editor_cell/obj_editor_cell.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":6,"collisionObjectId":null,"parent":{"name":"obj_editor_cell","path":"objects/obj_editor_cell/obj_editor_cell.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"obj_editor_cell","path":"objects/obj_editor_cell/obj_editor_cell.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":1,"eventType":6,"collisionObjectId":null,"parent":{"name":"obj_editor_cell","path":"objects/obj_editor_cell/obj_editor_cell.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":0,"eventType":8,"collisionObjectId":null,"parent":{"name":"obj_editor_cell","path":"objects/obj_editor_cell/obj_editor_cell.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},

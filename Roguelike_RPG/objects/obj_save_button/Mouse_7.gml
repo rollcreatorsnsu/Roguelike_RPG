@@ -1,4 +1,4 @@
-filename = get_string("Enter file name:", "file.room")
+filename = get_save_filename("*.room", "file")
 file = file_text_open_write(working_directory + "/" + filename)
 file_text_write_real(file, global.width)
 file_text_writeln(file)

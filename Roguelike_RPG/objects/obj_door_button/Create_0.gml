@@ -1,1 +1,0 @@
-factory = obj_door
