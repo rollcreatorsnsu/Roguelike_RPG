@@ -1,10 +1,10 @@
 function scr_getFilesByMask(files, mask){
-	files[0] = file_find_first(mask, 0)
-	i = 1
-	do {
-		filename = file_find_next()
+	filename = file_find_first(mask, 0)
+	i = 0
+	while (filename != "") {		
 		files[i] = filename
 		i++
-	} until (filename != "");
+		filename = file_find_next()
+	}
 	return i
 }

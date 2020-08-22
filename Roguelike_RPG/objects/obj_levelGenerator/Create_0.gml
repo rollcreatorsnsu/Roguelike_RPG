@@ -14,46 +14,48 @@ for (i = 0; i < rooms_count; i++) {
 	file_text_readln(file)
 	height = file_text_read_real(file)
 	file_text_readln(file)
-	x0 = full_width
-	y0 = full_height
+	x0 = full_width + 1
+	y0 = full_height + 1
 	found = false
 	if (full_width > full_height) {
-		for (y = 0; y < full_height; y++) {
-			for (x = 0; x < full_width; x++) {
+		for (y = 0; y <= full_height; y++) {
+			for (x = 0; x <= full_width; x++) {
+				found = true
 				for (r = 0; r < i; r++) {
-					if (x >= room_coords[i][0] && x <= room_coords[i][2] ||
-						x + width + 3 >= room_coords[i][0] && x + width + 3 <= room_coords[i][2] ||
-						y >= room_coords[i][1] && y <= room_coords[i][3] ||
-						y + height + 3 >= room_coords[i][1] && y + height + 3 <= room_coords[i][3]) {
-						x = max(x, room_coords[i][2])
-					} else {
-						x0 = x
-						y0 = y
-						found = true
-						break
+					if (x >= room_coords[r][0] && x <= room_coords[r][2] &&
+						y >= room_coords[r][1] && y <= room_coords[r][3] ||
+						x + width + 3 >= room_coords[r][0] && x + width + 3 <= room_coords[r][2] &&
+						y + height + 3 >= room_coords[r][1] && y + height + 3 <= room_coords[r][3]) {
+						x = max(x, room_coords[r][2])
+						found = false
 					}
 				}
-				if (found) break
+				if (found) {
+					x0 = x
+					y0 = y
+					break
+				}
 			}
 			if (found) break
 		}
 	} else {
-		for (x = 0; x < full_width; x++) {
-			for (y = 0; y < full_height; y++) {
+		for (x = 0; x <= full_width; x++) {
+			for (y = 0; y <= full_height; y++) {
+				found = true
 				for (r = 0; r < i; r++) {
-					if (x >= room_coords[i][0] && x <= room_coords[i][2] ||
-						x + width + 3 >= room_coords[i][0] && x + width + 3 <= room_coords[i][2] ||
-						y >= room_coords[i][1] && y <= room_coords[i][3] ||
-						y + height + 3 >= room_coords[i][1] && y + height + 3 <= room_coords[i][3]) {
-						y = max(y, room_coords[i][3])
-					} else {
-						x0 = x
-						y0 = y
-						found = true
-						break
+					if (x >= room_coords[r][0] && x <= room_coords[r][2] &&
+						y >= room_coords[r][1] && y <= room_coords[r][3] ||
+						x + width + 3 >= room_coords[r][0] && x + width + 3 <= room_coords[r][2] &&
+						y + height + 3 >= room_coords[r][1] && y + height + 3 <= room_coords[r][3]) {
+						y = max(y, room_coords[r][3])
+						found = false
 					}
 				}
-				if (found) break
+				if (found) {
+					x0 = x
+					y0 = y
+					break
+				}
 			}
 			if (found) break
 		}
