@@ -75,8 +75,8 @@ width = file_text_read_real(file)
 file_text_readln(file)
 height = file_text_read_real(file)
 file_text_readln(file)
-x0 = -width - 3
-y0 = -height - 3
+x0 = -width - 3 - 1
+y0 = -1
 room_coords[rooms_count] = [x0, y0, x0 + width + 3, y0 + width + 3]
 rooms_count++
 scr_putObject(file, x0, y0)
@@ -90,8 +90,8 @@ width = file_text_read_real(file)
 file_text_readln(file)
 height = file_text_read_real(file)
 file_text_readln(file)
-x0 = full_width
-y0 = full_height
+x0 = full_width + 1
+y0 = full_height - height
 room_coords[rooms_count] = [x0, y0, x0 + width + 3, y0 + width + 3]
 rooms_count++
 scr_putObject(file, x0, y0)
@@ -106,11 +106,11 @@ file_text_readln(file)
 height = file_text_read_real(file)
 file_text_readln(file)
 if (full_width > full_height) {
-	x0 = full_width
+	x0 = full_width + 1
 	y0 = 0
 } else {
 	x0 = 0
-	y0 = full_height
+	y0 = full_height + 1
 }
 room_coords[rooms_count] = [x0, y0, x0 + width + 3, y0 + width + 3]
 rooms_count++
@@ -127,9 +127,9 @@ height = file_text_read_real(file)
 file_text_readln(file)
 if (full_width > full_height) {
 	x0 = 0
-	y0 = full_height
+	y0 = full_height + 1
 } else {
-	x0 = full_width
+	x0 = full_width + 1
 	y0 = 0
 }
 room_coords[rooms_count] = [x0, y0, x0 + width + 3, y0 + width + 3]
@@ -140,14 +140,16 @@ file_text_close(file)
 room_connections = []
 connections_count = 0
 
-for (i = 0; i < room_number; i++) {
-	for (j = i; j < room_number; j++) {
-		if (((room_coords[j][0] >= room_coords[i][0] && room_coords[j][0] <= room_coords[i][2]) || 
+dist = 2
+
+for (i = 0; i < rooms_count; i++) {
+	for (j = i + 1; j < rooms_count; j++) {
+		if ((((room_coords[j][0] >= room_coords[i][0] && room_coords[j][0] <= room_coords[i][2]) || 
 			(room_coords[j][2] >= room_coords[i][0] && room_coords[j][2] <= room_coords[i][2])) &&
-			(room_coords[i][3] == room_coords[j][1] || room_coords[i][1] == room_coords[j][3]) ||
-			((room_coords[j][1] >= room_coords[i][1] && room_coords[j][1] <= room_coords[i][3]) || 
+			(abs(room_coords[i][3] - room_coords[j][1]) < dist || abs(room_coords[i][1] - room_coords[j][3]) < dist)) ||
+			(((room_coords[j][1] >= room_coords[i][1] && room_coords[j][1] <= room_coords[i][3]) || 
 			(room_coords[j][3] >= room_coords[i][1] && room_coords[j][3] <= room_coords[i][1])) &&
-			(room_coords[i][2] == room_coords[j][0] || room_coords[i][0] == room_coords[j][2])) {
+			(abs(room_coords[i][2] - room_coords[j][0]) < dist || abs(room_coords[i][0] - room_coords[j][2]) < dist))) {
 			room_connections[connections_count] = [i, j]
 			connections_count++
 		}
@@ -157,14 +159,16 @@ for (i = 0; i < room_number; i++) {
 for (i = 0; i < connections_count; i++) {
 	room_size_prev = room_coords[room_connections[i][0]]
 	room_size_next = room_coords[room_connections[i][1]]
+	show_debug_message(room_size_prev)
+	show_debug_message(room_size_next)
 	door_prev_coord = [0, 0]
 	door_next_coord = [0, 0]
-	if (room_size_prev[3] == room_size_next[1] || room_size_prev[1] == room_size_next[3]) {
+	if (abs(room_size_prev[3] - room_size_next[1]) < dist || abs(room_size_prev[1] - room_size_next[3]) < dist) {
 		segment_begin = max(room_size_prev[0], room_size_next[0])
 		segment_end = min(room_size_prev[2], room_size_next[2])
-		door_prev_coord[0] = (segment_begin + segment_end) / 2
-		door_next_coord[0] = (segment_begin + segment_end) / 2
-		if (room_size_prev[3] == room_size_next[1]) {
+		door_prev_coord[0] = round((segment_begin + segment_end) / 2)
+		door_next_coord[0] = round((segment_begin + segment_end) / 2)
+		if (abs(room_size_prev[3] - room_size_next[1]) < dist) {
 			door_prev_coord[1] = room_size_prev[3] - 3
 			door_next_coord[1] = room_size_next[1]
 			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) == noone) {
@@ -186,9 +190,9 @@ for (i = 0; i < connections_count; i++) {
 	} else {
 		segment_begin = max(room_size_prev[1], room_size_next[1])
 		segment_end = min(room_size_prev[3], room_size_next[3])
-		door_prev_coord[1] = (segment_begin + segment_end) / 2
-		door_next_coord[1] = (segment_begin + segment_end) / 2
-		if (room_size_prev[2] == room_size_next[0]) {
+		door_prev_coord[1] = round((segment_begin + segment_end) / 2)
+		door_next_coord[1] = round((segment_begin + segment_end) / 2)
+		if (abs(room_size_prev[2] - room_size_next[0]) < dist) {
 			door_prev_coord[0] = room_size_prev[2] - 3
 			door_next_coord[0] = room_size_next[0]
 			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) == noone) {
