@@ -14,8 +14,13 @@ for (i = 0; i < rooms_count; i++) {
 	file_text_readln(file)
 	height = file_text_read_real(file)
 	file_text_readln(file)
-	x0 = full_width + 1
-	y0 = full_height + 1
+	if (full_width > full_height) {
+		x0 = 0
+		y0 = full_height + 1
+	} else {
+		x0 = full_width + 1
+		y0 = 0
+	}
 	found = false
 	if (full_width > full_height) {
 		for (y = 0; y <= full_height; y++) {
