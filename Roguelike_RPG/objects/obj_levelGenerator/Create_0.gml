@@ -181,18 +181,34 @@ for (i = 0; i < connections_count; i++) {
 			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) == noone) {
 				door_prev_coord[1]--
 			}
+			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) != noone) {
+				door_prev_coord[1]--
+			}
+			door_prev_coord[1]++
 			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) == noone) {
 				door_next_coord[1]++
 			}
+			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) != noone) {
+				door_next_coord[1]++
+			}
+			door_next_coord[1]--
 		} else {
 			door_prev_coord[1] = room_size_prev[1]
 			door_next_coord[1] = room_size_next[3] - 3
 			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) == noone) {
 				door_prev_coord[1]++
 			}
+			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) != noone) {
+				door_prev_coord[1]++
+			}
+			door_prev_coord[1]--
 			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) == noone) {
 				door_next_coord[1]--
 			}
+			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) != noone) {
+				door_next_coord[1]--
+			}
+			door_next_coord[1]++
 		}
 	} else {
 		segment_begin = max(room_size_prev[1], room_size_next[1])
@@ -205,37 +221,55 @@ for (i = 0; i < connections_count; i++) {
 			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) == noone) {
 				door_prev_coord[0]--
 			}
+			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) != noone) {
+				door_prev_coord[0]--
+			}
+			door_prev_coord[0]++
 			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) == noone) {
 				door_next_coord[0]++
 			}
+			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) != noone) {
+				door_next_coord[0]++
+			}
+			door_next_coord[0]--
 		} else {
 			door_prev_coord[0] = room_size_prev[0]
 			door_next_coord[0] = room_size_next[2] - 3
 			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) == noone) {
 				door_prev_coord[0]++
 			}
+			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) != noone) {
+				door_prev_coord[0]++
+			}
+			door_prev_coord[0]--
 			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) == noone) {
 				door_next_coord[0]--
 			}
+			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) != noone) {
+				door_next_coord[0]--
+			}
+			door_next_coord[0]++
+		}
+	}
+	if (door_prev_coord[0] == door_next_coord[0]) {
+		way_begin = min(door_prev_coord[1], door_next_coord[1])
+		way_end = max(door_prev_coord[1], door_next_coord[1])
+		for (j = way_begin; j <= way_end; j++) {
+			instance_create_depth((door_prev_coord[0] - 1) * 32, j * 32, 0, obj_wall)
+			instance_destroy(instance_position(door_prev_coord[0] * 32, j * 32, obj_wall))
+			instance_create_depth((door_prev_coord[0] + 1) * 32, j * 32, 0, obj_wall)
+		}
+	} else {
+		way_begin = min(door_prev_coord[0], door_next_coord[0])
+		way_end = max(door_prev_coord[0], door_next_coord[0])
+		for (j = way_begin; j <= way_end; j++) {
+			instance_create_depth(j * 32, (door_prev_coord[1] - 1) * 32, 0, obj_wall)
+			instance_destroy(instance_position(j * 32, door_prev_coord[1] * 32, obj_wall))
+			instance_create_depth(j * 32, (door_prev_coord[1] + 1) * 32, 0, obj_wall)
 		}
 	}
 	instance_destroy(instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall))
 	instance_create_depth(door_prev_coord[0] * 32, door_prev_coord[1] * 32, 0, obj_door)
 	instance_destroy(instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall))
 	instance_create_depth(door_next_coord[0] * 32, door_next_coord[1] * 32, 0, obj_door)
-	if (door_prev_coord[0] == door_next_coord[0]) {
-		way_begin = min(door_prev_coord[1], door_next_coord[1])
-		way_end = max(door_prev_coord[1], door_next_coord[1])
-		for (j = way_begin + 1; j < way_end; j++) {
-			instance_create_depth((door_prev_coord[0] - 1) * 32, j * 32, 0, obj_wall)
-			instance_create_depth((door_prev_coord[0] + 1) * 32, j * 32, 0, obj_wall)
-		}
-	} else {
-		way_begin = min(door_prev_coord[0], door_next_coord[0])
-		way_end = max(door_prev_coord[0], door_next_coord[0])
-		for (j = way_begin + 1; j < way_end; j++) {
-			instance_create_depth(j * 32, (door_prev_coord[1] - 1) * 32, 0, obj_wall)
-			instance_create_depth(j * 32, (door_prev_coord[1] + 1) * 32, 0, obj_wall)
-		}
-	}
 }
