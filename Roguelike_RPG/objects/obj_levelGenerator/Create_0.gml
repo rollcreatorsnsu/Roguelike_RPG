@@ -150,10 +150,14 @@ dist = 2
 for (i = 0; i < rooms_count; i++) {
 	for (j = i + 1; j < rooms_count; j++) {
 		if ((((room_coords[j][0] >= room_coords[i][0] && room_coords[j][0] <= room_coords[i][2]) || 
-			(room_coords[j][2] >= room_coords[i][0] && room_coords[j][2] <= room_coords[i][2])) &&
+			(room_coords[j][2] >= room_coords[i][0] && room_coords[j][2] <= room_coords[i][2]) ||
+			(room_coords[i][0] >= room_coords[j][0] && room_coords[i][0] <= room_coords[j][2]) ||
+			(room_coords[i][2] >= room_coords[j][0] && room_coords[i][2] <= room_coords[j][2])) &&
 			(abs(room_coords[i][3] - room_coords[j][1]) < dist || abs(room_coords[i][1] - room_coords[j][3]) < dist)) ||
 			(((room_coords[j][1] >= room_coords[i][1] && room_coords[j][1] <= room_coords[i][3]) || 
-			(room_coords[j][3] >= room_coords[i][1] && room_coords[j][3] <= room_coords[i][1])) &&
+			(room_coords[j][3] >= room_coords[i][1] && room_coords[j][3] <= room_coords[i][1]) ||
+			(room_coords[i][1] >= room_coords[j][1] && room_coords[i][1] <= room_coords[j][3]) ||
+			(room_coords[i][3] >= room_coords[j][1] && room_coords[i][3] <= room_coords[j][1])) &&
 			(abs(room_coords[i][2] - room_coords[j][0]) < dist || abs(room_coords[i][0] - room_coords[j][2]) < dist))) {
 			room_connections[connections_count] = [i, j]
 			connections_count++
