@@ -22,6 +22,7 @@
     {"id":{"name":"obj_wall_button","path":"objects/obj_wall_button/obj_wall_button.yy",},"order":2,},
     {"id":{"name":"obj_rock_button","path":"objects/obj_rock_button/obj_rock_button.yy",},"order":4,},
     {"id":{"name":"obj_enemy_button","path":"objects/obj_enemy_button/obj_enemy_button.yy",},"order":5,},
+    {"id":{"name":"obj_door_button","path":"objects/obj_door_button/obj_door_button.yy",},"order":9,},
     {"id":{"name":"obj_editor_cell","path":"objects/obj_editor_cell/obj_editor_cell.yy",},"order":6,},
     {"id":{"name":"obj_save_button","path":"objects/obj_save_button/obj_save_button.yy",},"order":7,},
     {"id":{"name":"obj_open_button","path":"objects/obj_open_button/obj_open_button.yy",},"order":8,},
@@ -48,8 +49,8 @@
     "children": [],
   },
   "RoomOrder": [
-    {"name":"room_game","path":"rooms/room_game/room_game.yy",},
     {"name":"room_editor","path":"rooms/room_editor/room_editor.yy",},
+    {"name":"room_game","path":"rooms/room_game/room_game.yy",},
   ],
   "Folders": [
     {"folderPath":"folders/Sprites.yy","order":0,"resourceVersion":"1.0","name":"Sprites","tags":[],"resourceType":"GMFolder",},
