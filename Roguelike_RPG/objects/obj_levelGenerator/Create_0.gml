@@ -107,10 +107,10 @@ height = file_text_read_real(file)
 file_text_readln(file)
 if (full_width > full_height) {
 	x0 = full_width + 1
-	y0 = 0
+	y0 = -1
 } else {
-	x0 = 0
-	y0 = full_height + 1
+	x0 = -width - 3 - 1
+	y0 = full_height - height
 }
 room_coords[rooms_count] = [x0, y0, x0 + width + 3, y0 + width + 3]
 rooms_count++
@@ -126,11 +126,11 @@ file_text_readln(file)
 height = file_text_read_real(file)
 file_text_readln(file)
 if (full_width > full_height) {
-	x0 = 0
-	y0 = full_height + 1
+	x0 = -width - 3 - 1
+	y0 = full_height - height
 } else {
 	x0 = full_width + 1
-	y0 = 0
+	y0 = -1
 }
 room_coords[rooms_count] = [x0, y0, x0 + width + 3, y0 + width + 3]
 rooms_count++
@@ -159,13 +159,11 @@ for (i = 0; i < rooms_count; i++) {
 for (i = 0; i < connections_count; i++) {
 	room_size_prev = room_coords[room_connections[i][0]]
 	room_size_next = room_coords[room_connections[i][1]]
-	show_debug_message(room_size_prev)
-	show_debug_message(room_size_next)
 	door_prev_coord = [0, 0]
 	door_next_coord = [0, 0]
 	if (abs(room_size_prev[3] - room_size_next[1]) < dist || abs(room_size_prev[1] - room_size_next[3]) < dist) {
 		segment_begin = max(room_size_prev[0], room_size_next[0])
-		segment_end = min(room_size_prev[2], room_size_next[2])
+		segment_end = min(room_size_prev[2] - 3, room_size_next[2] - 3)
 		door_prev_coord[0] = round((segment_begin + segment_end) / 2)
 		door_next_coord[0] = round((segment_begin + segment_end) / 2)
 		if (abs(room_size_prev[3] - room_size_next[1]) < dist) {
@@ -189,7 +187,7 @@ for (i = 0; i < connections_count; i++) {
 		}
 	} else {
 		segment_begin = max(room_size_prev[1], room_size_next[1])
-		segment_end = min(room_size_prev[3], room_size_next[3])
+		segment_end = min(room_size_prev[3] - 3, room_size_next[3] - 3)
 		door_prev_coord[1] = round((segment_begin + segment_end) / 2)
 		door_next_coord[1] = round((segment_begin + segment_end) / 2)
 		if (abs(room_size_prev[2] - room_size_next[0]) < dist) {
@@ -205,10 +203,10 @@ for (i = 0; i < connections_count; i++) {
 			door_prev_coord[0] = room_size_prev[0]
 			door_next_coord[0] = room_size_next[2] - 3
 			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) == noone) {
-				door_prev_coord[1]++
+				door_prev_coord[0]++
 			}
 			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) == noone) {
-				door_next_coord[1]--
+				door_next_coord[0]--
 			}
 		}
 	}
@@ -227,8 +225,8 @@ for (i = 0; i < connections_count; i++) {
 		way_begin = min(door_prev_coord[0], door_next_coord[0])
 		way_end = max(door_prev_coord[0], door_next_coord[0])
 		for (j = way_begin + 1; j < way_end; j++) {
-			instance_create_depth(j * 32, (door_prev_coord[0] - 1) * 32, 0, obj_wall)
-			instance_create_depth(j * 32, (door_prev_coord[0] + 1) * 32, 0, obj_wall)
+			instance_create_depth(j * 32, (door_prev_coord[1] - 1) * 32, 0, obj_wall)
+			instance_create_depth(j * 32, (door_prev_coord[1] + 1) * 32, 0, obj_wall)
 		}
 	}
 }
