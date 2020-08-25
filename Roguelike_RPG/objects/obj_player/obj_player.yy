@@ -1,8 +1,5 @@
 {
-  "spriteId": {
-    "name": "sp_pattern_hero_front_mid_idle",
-    "path": "sprites/sp_pattern_hero_front_mid_idle/sp_pattern_hero_front_mid_idle.yy",
-  },
+  "spriteId": null,
   "solid": false,
   "visible": true,
   "spriteMaskId": null,

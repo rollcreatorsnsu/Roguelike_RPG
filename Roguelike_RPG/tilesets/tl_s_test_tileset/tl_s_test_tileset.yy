@@ -1,8 +1,5 @@
 {
-  "spriteId": {
-    "name": "sp_test_tiles",
-    "path": "sprites/sp_test_tiles/sp_test_tiles.yy",
-  },
+  "spriteId": null,
   "tileWidth": 32,
   "tileHeight": 32,
   "tilexoff": 0,
