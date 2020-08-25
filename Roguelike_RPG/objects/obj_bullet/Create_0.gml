@@ -1,0 +1,1 @@
+motion_set(point_direction(x, y, mouse_x, mouse_y), 1)
