@@ -3,4 +3,4 @@ enum PlayerState {
 	run
 }
 state = PlayerState.idle
-current_weapon = undefined
+current_weapon = obj_pistol

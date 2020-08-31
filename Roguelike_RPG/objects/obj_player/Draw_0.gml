@@ -63,9 +63,14 @@ switch (state) {
 	}
 }
 
+dir_left = dir
+dir_right = dir
+vertical_reflection = (dir < 90 || dir > 270) ? 1 : -1
+
 switch (current_weapon) {
 	case obj_pistol: {
 		sprite_right_hand = sp_hero_back_mid_idle_r_arm_w
+		dir_left = dir < 180 ? 0 : 180
 		break;
 	}
 	case obj_machine_gun: {
@@ -74,11 +79,11 @@ switch (current_weapon) {
 }
 
 if (dir < 180) {
-	draw_sprite_ext(sprite_body, image_index, x, y, horizontal_reflection, 1, 0, c_white, 1)
-	draw_sprite_ext(sprite_left_hand, image_index, x, y, horizontal_reflection, 1, dir, c_white, 1)
-	draw_sprite_ext(sprite_right_hand, image_index, x, y, horizontal_reflection, 1, dir, c_white, 1)
+	draw_sprite_ext(sprite_left_hand, image_index, x, y, 1, vertical_reflection, dir_left, c_white, 1)
+	draw_sprite_ext(sprite_right_hand, image_index, x, y, 1, vertical_reflection, dir_right, c_white, 1)
+	draw_sprite_ext(sprite_body, image_index, x, y, horizontal_reflection, 1, 0, c_white, 1)	
 } else {
-	draw_sprite_ext(sprite_left_hand, image_index, x, y, horizontal_reflection, 1, dir, c_white, 1)
-	draw_sprite_ext(sprite_right_hand, image_index, x, y, horizontal_reflection, 1, dir, c_white, 1)
 	draw_sprite_ext(sprite_body, image_index, x, y, horizontal_reflection, 1, 0, c_white, 1)
+	draw_sprite_ext(sprite_left_hand, image_index, x, y, 1, vertical_reflection, dir_left, c_white, 1)
+	draw_sprite_ext(sprite_right_hand, image_index, x, y, 1, vertical_reflection, dir_right, c_white, 1)
 }
