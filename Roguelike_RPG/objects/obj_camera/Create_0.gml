@@ -2,11 +2,9 @@ N_height = 12
 N_hor = 16
 display_height = display_get_height()
 display_width = display_get_width()
-window_set_size(display_width, display_height)
 window_set_fullscreen(true)
 view_enabled = true
 view_visible[0] = true
-camera_set_view_target(view_camera[0], obj_player)
 block_height = display_height / N_height
 block_width = display_width / N_hor
 if (block_height < block_width) {
