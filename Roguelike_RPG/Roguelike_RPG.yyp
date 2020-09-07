@@ -52,6 +52,7 @@
     {"id":{"name":"sp_hero_back_right_run_l_arm_ww","path":"sprites/sp_hero_back_right_run_l_arm_ww/sp_hero_back_right_run_l_arm_ww.yy",},"order":3,},
     {"id":{"name":"obj_open_button","path":"objects/obj_open_button/obj_open_button.yy",},"order":8,},
     {"id":{"name":"sp_hero_front_mid_idle_l_arm_ww","path":"sprites/sp_hero_front_mid_idle_l_arm_ww/sp_hero_front_mid_idle_l_arm_ww.yy",},"order":4,},
+    {"id":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},"order":7,},
     {"id":{"name":"obj_environment","path":"objects/obj_environment/obj_environment.yy",},"order":0,},
     {"id":{"name":"sp_hero_front_mid_run_r_arm_ww","path":"sprites/sp_hero_front_mid_run_r_arm_ww/sp_hero_front_mid_run_r_arm_ww.yy",},"order":5,},
     {"id":{"name":"sp_hero_front_right_run_r_arm_ww","path":"sprites/sp_hero_front_right_run_r_arm_ww/sp_hero_front_right_run_r_arm_ww.yy",},"order":7,},
