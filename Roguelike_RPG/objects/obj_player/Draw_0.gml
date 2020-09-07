@@ -70,7 +70,7 @@ vertical_reflection = (dir < 90 || dir > 270) ? 1 : -1
 switch (current_weapon) {
 	case obj_pistol: {
 		sprite_right_hand = sp_hero_back_mid_idle_r_arm_w
-		dir_left = dir < 180 ? 0 : 180
+		dir_left = (dir < 90 || dir > 270) ? 0 : 180
 		break;
 	}
 	case obj_machine_gun: {
