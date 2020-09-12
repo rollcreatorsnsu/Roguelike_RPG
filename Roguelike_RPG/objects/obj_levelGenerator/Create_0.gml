@@ -1,3 +1,4 @@
+random_set_seed(randomise())
 files = []
 files_number = scr_getFilesByMask(files, "usual*.room")
 rooms_count = get_integer("Enter number of rooms", 4)
