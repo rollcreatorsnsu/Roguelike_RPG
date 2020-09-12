@@ -194,10 +194,15 @@ for (i = 0; i < rooms_count; i++) {
 	for (j = 0; j < array_length_1d(doors_coords[i]); j++) {
 		needed = false
 		for (k = 0; k < connections_count; k++) {
-			if ((room_connections[k][0][0] == i && room_connections[k][0][1] == j) ||
-				(room_connections[k][1][0] == i && room_connections[k][1][1] == j)) {
+			original_coords = doors_coords[i][j]
+			begin_coords = doors_coords[room_connections[k][0][0]][room_connections[k][0][1]]
+			end_coords = doors_coords[room_connections[k][1][0]][room_connections[k][1][1]]
+			if (point_distance(original_coords[0], original_coords[1],
+					begin_coords[0], begin_coords[1]) < 2 ||
+				point_distance(original_coords[0], original_coords[1],
+					end_coords[0], end_coords[1]) < 2) {
 				needed = true;
-				break
+				break;
 			}
 		}
 		if (needed) continue
@@ -209,37 +214,68 @@ for (i = 0; i < rooms_count; i++) {
 for (i = 0; i < connections_count; i++) {
 	point1 = doors_coords[room_connections[i][0][0]][room_connections[i][0][1]]
 	point2 = doors_coords[room_connections[i][1][0]][room_connections[i][1][1]]
-	queue = ds_queue_create()
-	visited = ds_map_create()
-	ds_queue_enqueue(queue, point1)
-	ds_map_add(visited, string(point1), [point1, "parent"])
-	while (!ds_queue_empty(queue)) {
-		node = ds_queue_dequeue(queue)
-		if (node[0] == point2[0] && node[1] == point2[1]) {
-			node = visited[? string(node)]
-			break
+	points_start = []
+	points_end = []
+	check_start = [[point1[0] - 1, point1[1]],
+		[point1[0], point1[1] - 1],
+		point1,
+		[point1[0], point1[1] + 1],
+		[point1[0] + 1, point1[1]]]
+	check_end = [[point2[0] - 1, point2[1]],
+		[point2[0], point2[1] - 1],
+		point2,
+		[point2[0], point2[1] + 1],
+		[point2[0] + 1, point2[1]]]
+	for (k = 0; k < 5; k++) {
+		if (instance_position(check_start[k][0] * 32, check_start[k][1] * 32, obj_door) != noone) {
+			points_start[array_length(points_start)] = check_start[k];
 		}
-		points = [[node[0] - 1, node[1]],
-			[node[0], node[1] + 1],
-			[node[0] + 1, node[1]],
-			[node[0], node[1] - 1]]
-		for (j = 0; j < 4; j++) {
-			if (instance_position(points[j][0] * 32, points[j][1] * 32, obj_wall)) {
-				continue
-			}
-			if (!ds_map_exists(visited, string(points[j]))) {
-				ds_queue_enqueue(queue, points[j])
-				ds_map_add(visited, string(points[j]), [points[j], string(node)])
-			}
+		if (instance_position(check_end[k][0] * 32, check_end[k][1] * 32, obj_door) != noone) {
+			points_end[array_length(points_end)] = check_end[k];
 		}
 	}
-	node = visited[? node[1]]
-	while (node[1] != "parent") {
-		scr_fillMarkers(node[0])
-		node = visited[? node[1]]
+	for (k = 0; k < array_length(points_start); k++) {
+		for (l = 0; l < array_length(points_end); l++) {
+			point1 = points_start[k]
+			point2 = points_end[l]
+			queue = ds_queue_create()
+			visited = ds_map_create()
+			ds_queue_enqueue(queue, point1)
+			ds_map_add(visited, string(point1), [point1, "parent"])
+			while (!ds_queue_empty(queue)) {
+				node = ds_queue_dequeue(queue)
+				if (point2[0] == node[0] && point2[1] == node[1]) {
+					node = visited[? string(node)]
+					break
+				}
+				points = [[node[0] - 1, node[1]],
+					[node[0], node[1] + 1],
+					[node[0] + 1, node[1]],
+					[node[0], node[1] - 1]]
+				for (j = 0; j < 4; j++) {
+					if (instance_position(points[j][0] * 32, points[j][1] * 32, obj_wall)) {
+						continue
+					}
+					if (instance_position(points[j][0] * 32, points[j][1] * 32, obj_door)) {
+						if (points[j][0] != point2[0] || points[j][1] != point2[1]) {
+							continue
+						}
+					}
+					if (!ds_map_exists(visited, string(points[j]))) {
+						ds_queue_enqueue(queue, points[j])
+						ds_map_add(visited, string(points[j]), [points[j], string(node)])
+					}
+				}
+			}
+			node = visited[? node[1]]
+			while (node[1] != "parent") {
+				scr_fillMarkers(node[0])
+				node = visited[? node[1]]
+			}
+			ds_queue_destroy(queue)
+			ds_map_destroy(visited)
+		}
 	}
-	ds_queue_destroy(queue)
-	ds_map_destroy(visited)
 }
 
 instance_destroy(obj_marker_path)
