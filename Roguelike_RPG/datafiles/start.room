@@ -12,10 +12,10 @@ obj_wall
 obj_wall
 0 
 3 
-obj_wall
+obj_door
 0 
 4 
-obj_wall
+obj_door
 0 
 5 
 obj_wall
@@ -48,7 +48,7 @@ obj_wall
 obj_wall
 3 
 9 
-obj_wall
+obj_door
 4 
 0 
 obj_wall
@@ -63,10 +63,10 @@ obj_wall
 obj_wall
 4 
 6 
-obj_wall
+obj_door
 4 
 9 
-obj_wall
+obj_door
 5 
 0 
 obj_wall
@@ -78,7 +78,7 @@ obj_wall
 obj_wall
 5 
 6 
-obj_wall
+obj_door
 5 
 9 
 obj_wall
@@ -123,10 +123,10 @@ obj_wall
 obj_wall
 9 
 3 
-obj_wall
+obj_door
 9 
 4 
-obj_wall
+obj_door
 9 
 5 
 obj_wall
