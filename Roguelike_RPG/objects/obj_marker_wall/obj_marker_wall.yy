@@ -1,14 +1,20 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_rock",
+    "path": "sprites/spr_rock/spr_rock.yy",
+  },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "obj_environment",
+    "path": "objects/obj_environment/obj_environment.yy",
+  },
   "physicsObject": false,
   "physicsSensor": false,
   "physicsShape": 1,
-  "physicsGroup": 0,
+  "physicsGroup": 1,
   "physicsDensity": 0.5,
   "physicsRestitution": 0.1,
   "physicsLinearDamping": 0.1,
@@ -18,7 +24,7 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"obj_levelGenerator","path":"objects/obj_levelGenerator/obj_levelGenerator.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":1,"collisionObjectId":null,"parent":{"name":"obj_marker_wall","path":"objects/obj_marker_wall/obj_marker_wall.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
@@ -27,7 +33,7 @@
     "path": "folders/Objects/generator.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_levelGenerator",
+  "name": "obj_marker_wall",
   "tags": [],
   "resourceType": "GMObject",
 }

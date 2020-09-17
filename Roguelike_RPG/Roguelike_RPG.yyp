@@ -1,5 +1,6 @@
 {
   "resources": [
+    {"id":{"name":"scr_fillMarkers","path":"scripts/scr_fillMarkers/scr_fillMarkers.yy",},"order":3,},
     {"id":{"name":"sp_hero_back_mid_idle_r_arm_w","path":"sprites/sp_hero_back_mid_idle_r_arm_w/sp_hero_back_mid_idle_r_arm_w.yy",},"order":0,},
     {"id":{"name":"spr_mask","path":"sprites/spr_mask/spr_mask.yy",},"order":0,},
     {"id":{"name":"scr_getFilesByMask","path":"scripts/scr_getFilesByMask/scr_getFilesByMask.yy",},"order":1,},
@@ -27,7 +28,7 @@
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},"order":0,},
     {"id":{"name":"obj_pistol","path":"objects/obj_pistol/obj_pistol.yy",},"order":0,},
     {"id":{"name":"obj_bullet","path":"objects/obj_bullet/obj_bullet.yy",},"order":6,},
-    {"id":{"name":"obj_levelGenerator","path":"objects/obj_levelGenerator/obj_levelGenerator.yy",},"order":1,},
+    {"id":{"name":"obj_levelGenerator","path":"objects/obj_levelGenerator/obj_levelGenerator.yy",},"order":0,},
     {"id":{"name":"sp_pattern_hero_front_right_run","path":"sprites/sp_pattern_hero_front_right_run/sp_pattern_hero_front_right_run.yy",},"order":7,},
     {"id":{"name":"obj_edtor_init","path":"objects/obj_edtor_init/obj_edtor_init.yy",},"order":0,},
     {"id":{"name":"sp_hero_back_right_idle44","path":"sprites/sp_hero_back_right_idle44/sp_hero_back_right_idle44.yy",},"order":2,},
@@ -40,6 +41,7 @@
     {"id":{"name":"sp_hero_front_right_idle","path":"sprites/sp_hero_front_right_idle/sp_hero_front_right_idle.yy",},"order":8,},
     {"id":{"name":"sp_hero_front_right_run_l_arm_ww","path":"sprites/sp_hero_front_right_run_l_arm_ww/sp_hero_front_right_run_l_arm_ww.yy",},"order":7,},
     {"id":{"name":"obj_rock_button","path":"objects/obj_rock_button/obj_rock_button.yy",},"order":4,},
+    {"id":{"name":"obj_marker_wall","path":"objects/obj_marker_wall/obj_marker_wall.yy",},"order":3,},
     {"id":{"name":"obj_enemy_button","path":"objects/obj_enemy_button/obj_enemy_button.yy",},"order":5,},
     {"id":{"name":"sp_hero_greg_front_mid_idle","path":"sprites/sp_hero_greg_front_mid_idle/sp_hero_greg_front_mid_idle.yy",},"order":4,},
     {"id":{"name":"sp_hero_front_right_run49","path":"sprites/sp_hero_front_right_run49/sp_hero_front_right_run49.yy",},"order":7,},
@@ -65,6 +67,7 @@
     {"id":{"name":"obj_door","path":"objects/obj_door/obj_door.yy",},"order":2,},
     {"id":{"name":"sp_hero_back_mid_idle50","path":"sprites/sp_hero_back_mid_idle50/sp_hero_back_mid_idle50.yy",},"order":0,},
     {"id":{"name":"sp_bullet_main_hero","path":"sprites/sp_bullet_main_hero/sp_bullet_main_hero.yy",},"order":11,},
+    {"id":{"name":"obj_marker_path","path":"objects/obj_marker_path/obj_marker_path.yy",},"order":2,},
     {"id":{"name":"obj_rock","path":"objects/obj_rock/obj_rock.yy",},"order":3,},
     {"id":{"name":"sp_hero_back_mid_idle_l_arm_ww","path":"sprites/sp_hero_back_mid_idle_l_arm_ww/sp_hero_back_mid_idle_l_arm_ww.yy",},"order":0,},
     {"id":{"name":"sp_hero_back_right_run45","path":"sprites/sp_hero_back_right_run45/sp_hero_back_right_run45.yy",},"order":3,},
@@ -122,6 +125,7 @@
     {"folderPath":"folders/Sprites/sp_main_hero/Arm_right_without_weapon.yy","order":10,"resourceVersion":"1.0","name":"Arm_right_without_weapon","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Objects/weapon.yy","order":5,"resourceVersion":"1.0","name":"weapon","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Sprites/sp_hero_greg.yy","order":4,"resourceVersion":"1.0","name":"sp_hero_greg","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Objects/generator.yy","order":8,"resourceVersion":"1.0","name":"generator","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":461609314234257646,"resourceVersion":"1.0","name":"audiogroup_default","resourceType":"GMAudioGroup",},

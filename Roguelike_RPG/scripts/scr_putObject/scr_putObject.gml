@@ -1,4 +1,6 @@
-function scr_putObject(file, x0, y0) {
+function scr_putObject(file, x0, y0, doors_coords, index) {
+	doors_coords[index] = []
+	door_index = 0
 	while (!file_text_eof(file)) {
 		obj_name = file_text_read_string(file)
 		file_text_readln(file)
@@ -9,6 +11,10 @@ function scr_putObject(file, x0, y0) {
 		obj = undefined
 		switch (obj_name) {
 			case "obj_door":
+				obj = obj_door;
+				doors_coords[index][door_index] = [obj_x, obj_y]
+				door_index++
+				break;
 			case "obj_wall": {
 				obj = obj_wall
 				break;

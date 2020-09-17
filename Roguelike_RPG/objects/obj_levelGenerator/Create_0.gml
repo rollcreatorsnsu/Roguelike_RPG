@@ -4,6 +4,7 @@ rooms_count = get_integer("Enter number of rooms", 4)
 full_width = 0
 full_height = 0
 room_coords = []
+doors_coords = []
 for (i = 0; i < rooms_count; i++) {
 	do {
 		room_number = irandom_range(0, files_number - 1)
@@ -68,7 +69,7 @@ for (i = 0; i < rooms_count; i++) {
 	full_width = max(x0 + width + 3, full_width)
 	full_height = max(y0 + height + 3, full_height)
 	room_coords[i] = [x0, y0, x0 + width + 3, y0 + width + 3]
-	scr_putObject(file, x0, y0)
+	scr_putObject(file, x0, y0, doors_coords, i)
 	file_text_close(file)
 }
 
@@ -83,9 +84,9 @@ file_text_readln(file)
 x0 = -width - 3 - 1
 y0 = -1
 room_coords[rooms_count] = [x0, y0, x0 + width + 3, y0 + width + 3]
-rooms_count++
-scr_putObject(file, x0, y0)
+scr_putObject(file, x0, y0, doors_coords, rooms_count)
 file_text_close(file)
+rooms_count++
 
 files = []
 files_number = scr_getFilesByMask(files, "boss*.room")
@@ -98,9 +99,9 @@ file_text_readln(file)
 x0 = full_width + 1
 y0 = full_height - height
 room_coords[rooms_count] = [x0, y0, x0 + width + 3, y0 + width + 3]
-rooms_count++
-scr_putObject(file, x0, y0)
+scr_putObject(file, x0, y0, doors_coords, rooms_count)
 file_text_close(file)
+rooms_count++
 
 files = []
 files_number = scr_getFilesByMask(files, "treasure*.room")
@@ -118,9 +119,9 @@ if (full_width > full_height) {
 	y0 = full_height - height
 }
 room_coords[rooms_count] = [x0, y0, x0 + width + 3, y0 + width + 3]
-rooms_count++
-scr_putObject(file, x0, y0)
+scr_putObject(file, x0, y0, doors_coords, rooms_count)
 file_text_close(file)
+rooms_count++
 
 files = []
 files_number = scr_getFilesByMask(files, "shop*.room")
@@ -138,138 +139,107 @@ if (full_width > full_height) {
 	y0 = -1
 }
 room_coords[rooms_count] = [x0, y0, x0 + width + 3, y0 + width + 3]
-rooms_count++
-scr_putObject(file, x0, y0)
+scr_putObject(file, x0, y0, doors_coords, rooms_count)
 file_text_close(file)
+rooms_count++
 
 room_connections = []
 connections_count = 0
 
-dist = 2
+connected_rooms = [0]
+
+while (connections_count < rooms_count - 1) {
+	minimum_distance = infinity
+	minimum_distance_struct = []
+	for (i = 0; i <= connections_count; i++) {
+		for (j = 0; j < rooms_count; j++) {
+			connected = false;
+			for (k = 0; k <= connections_count; k++) {
+				if (connected_rooms[k] == j) {
+					connected = true;
+					break;
+				}
+			}
+			if (connected) continue
+			for (k = 0; k < array_length(doors_coords[connected_rooms[i]]); k++) {
+				for (l = 0; l < array_length(doors_coords[j]); l++) {
+					locked = false
+					for (m = 0; m < connections_count; m++) {
+						if ((room_connections[m][0][0] == j && room_connections[m][0][1] == l) ||
+							(room_connections[m][1][0] == j && room_connections[m][1][1] == l)) {
+								locked = true
+								break
+						}
+					}
+					if (locked) continue
+					distance = point_distance(doors_coords[connected_rooms[i]][k][0],
+						doors_coords[connected_rooms[i]][k][1],
+						doors_coords[j][l][0],
+						doors_coords[j][l][1])
+					if (distance < minimum_distance) {
+						minimum_distance = distance
+						minimum_distance_struct = [[connected_rooms[i], k], [j, l]]
+					}
+				}
+			}
+		}
+	}
+	room_connections[connections_count] = minimum_distance_struct
+	connections_count++
+	connected_rooms[connections_count] = minimum_distance_struct[1][0]
+}
 
 for (i = 0; i < rooms_count; i++) {
-	for (j = i + 1; j < rooms_count; j++) {
-		if ((((room_coords[j][0] >= room_coords[i][0] && room_coords[j][0] <= room_coords[i][2]) || 
-			(room_coords[j][2] >= room_coords[i][0] && room_coords[j][2] <= room_coords[i][2]) ||
-			(room_coords[i][0] >= room_coords[j][0] && room_coords[i][0] <= room_coords[j][2]) ||
-			(room_coords[i][2] >= room_coords[j][0] && room_coords[i][2] <= room_coords[j][2])) &&
-			(abs(room_coords[i][3] - room_coords[j][1]) < dist || abs(room_coords[i][1] - room_coords[j][3]) < dist)) ||
-			(((room_coords[j][1] >= room_coords[i][1] && room_coords[j][1] <= room_coords[i][3]) || 
-			(room_coords[j][3] >= room_coords[i][1] && room_coords[j][3] <= room_coords[i][1]) ||
-			(room_coords[i][1] >= room_coords[j][1] && room_coords[i][1] <= room_coords[j][3]) ||
-			(room_coords[i][3] >= room_coords[j][1] && room_coords[i][3] <= room_coords[j][1])) &&
-			(abs(room_coords[i][2] - room_coords[j][0]) < dist || abs(room_coords[i][0] - room_coords[j][2]) < dist))) {
-			room_connections[connections_count] = [i, j]
-			connections_count++
+	for (j = 0; j < array_length_1d(doors_coords[i]); j++) {
+		needed = false
+		for (k = 0; k < connections_count; k++) {
+			if ((room_connections[k][0][0] == i && room_connections[k][0][1] == j) ||
+				(room_connections[k][1][0] == i && room_connections[k][1][1] == j)) {
+				needed = true;
+				break
+			}
 		}
+		if (needed) continue
+		instance_destroy(instance_position(doors_coords[i][j][0] * 32, doors_coords[i][j][1] * 32, obj_door));
+		instance_create_depth(doors_coords[i][j][0] * 32, doors_coords[i][j][1] * 32, 0, obj_wall);
 	}
 }
 
 for (i = 0; i < connections_count; i++) {
-	room_size_prev = room_coords[room_connections[i][0]]
-	room_size_next = room_coords[room_connections[i][1]]
-	door_prev_coord = [0, 0]
-	door_next_coord = [0, 0]
-	if (abs(room_size_prev[3] - room_size_next[1]) < dist || abs(room_size_prev[1] - room_size_next[3]) < dist) {
-		segment_begin = max(room_size_prev[0], room_size_next[0])
-		segment_end = min(room_size_prev[2] - 3, room_size_next[2] - 3)
-		door_prev_coord[0] = round((segment_begin + segment_end) / 2)
-		door_next_coord[0] = round((segment_begin + segment_end) / 2)
-		if (abs(room_size_prev[3] - room_size_next[1]) < dist) {
-			door_prev_coord[1] = room_size_prev[3] - 3
-			door_next_coord[1] = room_size_next[1]
-			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) == noone) {
-				door_prev_coord[1]--
-			}
-			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) != noone) {
-				door_prev_coord[1]--
-			}
-			door_prev_coord[1]++
-			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) == noone) {
-				door_next_coord[1]++
-			}
-			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) != noone) {
-				door_next_coord[1]++
-			}
-			door_next_coord[1]--
-		} else {
-			door_prev_coord[1] = room_size_prev[1]
-			door_next_coord[1] = room_size_next[3] - 3
-			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) == noone) {
-				door_prev_coord[1]++
-			}
-			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) != noone) {
-				door_prev_coord[1]++
-			}
-			door_prev_coord[1]--
-			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) == noone) {
-				door_next_coord[1]--
-			}
-			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) != noone) {
-				door_next_coord[1]--
-			}
-			door_next_coord[1]++
+	point1 = doors_coords[room_connections[i][0][0]][room_connections[i][0][1]]
+	point2 = doors_coords[room_connections[i][1][0]][room_connections[i][1][1]]
+	queue = ds_queue_create()
+	visited = ds_map_create()
+	ds_queue_enqueue(queue, point1)
+	ds_map_add(visited, string(point1), [point1, "parent"])
+	while (!ds_queue_empty(queue)) {
+		node = ds_queue_dequeue(queue)
+		if (node[0] == point2[0] && node[1] == point2[1]) {
+			node = visited[? string(node)]
+			break
 		}
-	} else {
-		segment_begin = max(room_size_prev[1], room_size_next[1])
-		segment_end = min(room_size_prev[3] - 3, room_size_next[3] - 3)
-		door_prev_coord[1] = round((segment_begin + segment_end) / 2)
-		door_next_coord[1] = round((segment_begin + segment_end) / 2)
-		if (abs(room_size_prev[2] - room_size_next[0]) < dist) {
-			door_prev_coord[0] = room_size_prev[2] - 3
-			door_next_coord[0] = room_size_next[0]
-			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) == noone) {
-				door_prev_coord[0]--
+		points = [[node[0] - 1, node[1]],
+			[node[0], node[1] + 1],
+			[node[0] + 1, node[1]],
+			[node[0], node[1] - 1]]
+		for (j = 0; j < 4; j++) {
+			if (instance_position(points[j][0] * 32, points[j][1] * 32, obj_wall)) {
+				continue
 			}
-			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) != noone) {
-				door_prev_coord[0]--
+			if (!ds_map_exists(visited, string(points[j]))) {
+				ds_queue_enqueue(queue, points[j])
+				ds_map_add(visited, string(points[j]), [points[j], string(node)])
 			}
-			door_prev_coord[0]++
-			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) == noone) {
-				door_next_coord[0]++
-			}
-			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) != noone) {
-				door_next_coord[0]++
-			}
-			door_next_coord[0]--
-		} else {
-			door_prev_coord[0] = room_size_prev[0]
-			door_next_coord[0] = room_size_next[2] - 3
-			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) == noone) {
-				door_prev_coord[0]++
-			}
-			while (instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall) != noone) {
-				door_prev_coord[0]++
-			}
-			door_prev_coord[0]--
-			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) == noone) {
-				door_next_coord[0]--
-			}
-			while (instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall) != noone) {
-				door_next_coord[0]--
-			}
-			door_next_coord[0]++
 		}
 	}
-	if (door_prev_coord[0] == door_next_coord[0]) {
-		way_begin = min(door_prev_coord[1], door_next_coord[1])
-		way_end = max(door_prev_coord[1], door_next_coord[1])
-		for (j = way_begin; j <= way_end; j++) {
-			instance_create_depth((door_prev_coord[0] - 1) * 32, j * 32, 0, obj_wall)
-			instance_destroy(instance_position(door_prev_coord[0] * 32, j * 32, obj_wall))
-			instance_create_depth((door_prev_coord[0] + 1) * 32, j * 32, 0, obj_wall)
-		}
-	} else {
-		way_begin = min(door_prev_coord[0], door_next_coord[0])
-		way_end = max(door_prev_coord[0], door_next_coord[0])
-		for (j = way_begin; j <= way_end; j++) {
-			instance_create_depth(j * 32, (door_prev_coord[1] - 1) * 32, 0, obj_wall)
-			instance_destroy(instance_position(j * 32, door_prev_coord[1] * 32, obj_wall))
-			instance_create_depth(j * 32, (door_prev_coord[1] + 1) * 32, 0, obj_wall)
-		}
+	node = visited[? node[1]]
+	while (node[1] != "parent") {
+		scr_fillMarkers(node[0])
+		node = visited[? node[1]]
 	}
-	instance_destroy(instance_position(door_prev_coord[0] * 32, door_prev_coord[1] * 32, obj_wall))
-	instance_create_depth(door_prev_coord[0] * 32, door_prev_coord[1] * 32, 0, obj_door)
-	instance_destroy(instance_position(door_next_coord[0] * 32, door_next_coord[1] * 32, obj_wall))
-	instance_create_depth(door_next_coord[0] * 32, door_next_coord[1] * 32, 0, obj_door)
+	ds_queue_destroy(queue)
+	ds_map_destroy(visited)
 }
+
+instance_destroy(obj_marker_path)
+instance_destroy(obj_marker_wall)
