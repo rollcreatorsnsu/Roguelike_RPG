@@ -78,12 +78,16 @@ switch (current_weapon) {
 	}
 }
 
+left_hand_index = (left_hand_index + 1 / sprite_get_speed(sprite_left_hand)) % sprite_get_number(sprite_left_hand);
+right_hand_index = (right_hand_index + 1 / sprite_get_speed(sprite_right_hand)) % sprite_get_number(sprite_right_hand);
+body_index = (body_index + 1 / sprite_get_speed(sprite_body)) % sprite_get_number(sprite_body);
+
 if (dir < 180) {
-	draw_sprite_ext(sprite_left_hand, image_index, x, y, 1, vertical_reflection, dir_left, c_white, 1)
-	draw_sprite_ext(sprite_right_hand, image_index, x, y, 1, vertical_reflection, dir_right, c_white, 1)
-	draw_sprite_ext(sprite_body, image_index, x, y, horizontal_reflection, 1, 0, c_white, 1)	
+	draw_sprite_ext(sprite_left_hand, left_hand_index, x, y, 1, vertical_reflection, dir_left, c_white, 1)
+	draw_sprite_ext(sprite_right_hand, right_hand_index, x, y, 1, vertical_reflection, dir_right, c_white, 1)
+	draw_sprite_ext(sprite_body, body_index, x, y, horizontal_reflection, 1, 0, c_white, 1)	
 } else {
-	draw_sprite_ext(sprite_body, image_index, x, y, horizontal_reflection, 1, 0, c_white, 1)
-	draw_sprite_ext(sprite_left_hand, image_index, x, y, 1, vertical_reflection, dir_left, c_white, 1)
-	draw_sprite_ext(sprite_right_hand, image_index, x, y, 1, vertical_reflection, dir_right, c_white, 1)
+	draw_sprite_ext(sprite_body, body_index, x, y, horizontal_reflection, 1, 0, c_white, 1)
+	draw_sprite_ext(sprite_left_hand, left_hand_index, x, y, 1, vertical_reflection, dir_left, c_white, 1)
+	draw_sprite_ext(sprite_right_hand, right_hand_index, x, y, 1, vertical_reflection, dir_right, c_white, 1)
 }
